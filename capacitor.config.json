@@ -1,0 +1,9 @@
+{
+  "appId": "com.okosodo.pastquestion",
+  "appName": "Okosodo Past Question",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false
+  }
+}
