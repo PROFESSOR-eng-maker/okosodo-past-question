@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123c70">
+<meta name="description" content="Offline-friendly Nigerian CBT practice for WAEC, NECO and JAMB.">
+<link rel="manifest" href="manifest.json">
+<title>Okosodo Past Question</title>
+<style>
+:root{font-family:system-ui,Arial,sans-serif;color:#172033;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#123c70;color:white;padding:22px 16px}header h1{margin:0;font-size:1.65rem}header p{margin:6px 0 0;color:#dceaff}.wrap{max-width:850px;margin:22px auto;padding:0 14px}.card{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 4px 18px #17375e12}label{display:block;font-weight:650;margin:12px 0 6px}select,button{font:inherit;padding:11px 12px;border-radius:9px;border:1px solid #cbd5e1;width:100%}button{background:#1556a6;color:#fff;border:0;font-weight:700;cursor:pointer;margin-top:12px}button.secondary{background:#e8eef8;color:#17365e}button:disabled{opacity:.5;cursor:not-allowed}.notice{background:#fff7df;border-left:4px solid #e6a700;padding:12px;border-radius:8px;font-size:.92rem}.muted{color:#596579;font-size:.92rem}.option{display:block;text-align:left;background:#f4f7fc;color:#172033;border:1px solid #d6dfed;margin:9px 0}.option.chosen{border:2px solid #1556a6;background:#eaf2ff}.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700}.hidden{display:none}.result{font-size:1.2rem;font-weight:800}.links a{display:inline-block;margin:8px 12px 0 0;color:#1556a6}footer{text-align:center;color:#667085;padding:20px;font-size:.85rem}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>Okosodo Past Question</h1><p>Practice smarter. Prepare with confidence.</p></div></header>
+<main class="wrap">
+<section class="card" id="setup">
+<h2>Start a CBT practice</h2>
+<p class="notice"><strong>Question status:</strong> The questions currently included are sample practice questions, not verified official WAEC, NECO or JAMB past-paper questions. Official questions will be clearly labelled only after their source is verified.</p>
+<label for="exam">Examination</label><select id="exam"><option>WAEC</option><option>NECO</option><option>JAMB</option><option>General Practice</option></select>
+<label for="subject">Subject</label><select id="subject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Economics</option><option>Government</option><option>Computer Studies</option></select>
+<label for="count">Number of questions</label><select id="count"><option value="5">5 questions</option><option value="10">10 questions</option></select>
+<button id="start">Start practice</button>
+<p class="muted">The app shell works offline after it has been loaded once while online. External official websites still require internet access.</p>
+</section>
+<section class="card hidden" id="quiz">
+<div class="topline"><span id="progress"></span><span id="timer">Time: 00:00</span></div><hr>
+<p class="muted" id="status">Sample practice question</p><h2 id="question"></h2><div id="options"></div>
+<button id="next">Next question</button><button class="secondary" id="quit">End practice</button>
+</section>
+<section class="card hidden" id="results"><h2>Practice results</h2><p class="result" id="score"></p><div id="review"></div><button id="again">Try again</button></section>
+<section class="card"><h2>Official examination resources</h2><p class="muted">These links are provided for checking official information and resources. They need an internet connection.</p><div class="links"><a href="https://www.waeconline.org.ng/e-learning/" target="_blank" rel="noopener">WAEC e-Learning</a><a href="https://waec.estudy.ng/" target="_blank" rel="noopener">WAEC e-Study</a><a href="https://neco.gov.ng/" target="_blank" rel="noopener">NECO official site</a><a href="https://www.jamb.gov.ng/" target="_blank" rel="noopener">JAMB official site</a></div></section>
+</main><footer>Okosodo Past Question · Offline-friendly CBT starter</footer>
+<script>
+const bank={
+'Mathematics':[
+{q:'Evaluate 12 ÷ 3 + 2.',o:['2','4','6','8'],a:2,e:'Division first: 12 ÷ 3 = 4, then 4 + 2 = 6.'},
+{q:'Solve: 3x = 21.',o:['6','7','8','9'],a:1,e:'Divide both sides by 3: x = 7.'},
+{q:'What is the area of a rectangle 8 cm long and 3 cm wide?',o:['11 cm²','16 cm²','24 cm²','32 cm²'],a:2,e:'Area = length × width = 8 × 3 = 24 cm².'},
+{q:'Express 0.25 as a fraction in its simplest form.',o:['1/2','1/3','1/4','3/4'],a:2,e:'0.25 = 25/100 = 1/4.'},
+{q:'Find the mean of 2, 4 and 9.',o:['4','5','6','15'],a:1,e:'Mean = (2 + 4 + 9) ÷ 3 = 5.'}],
+'English Language':[
+{q:'Choose the word closest in meaning to “rapid”.',o:['Slow','Quick','Weak','Quiet'],a:1,e:'Rapid means fast or quick.'},
+{q:'Choose the correct sentence.',o:['She go to school daily.','She goes to school daily.','She going school daily.','She gone to school daily.'],a:1,e:'With “she” in the simple present, use “goes”.'},
+{q:'What is the plural of “child”?',o:['Childs','Childes','Children','Childrens'],a:2,e:'The plural of child is children.'}],
+'Biology':[{q:'Which organelle is known as the powerhouse of the cell?',o:['Nucleus','Mitochondrion','Ribosome','Vacuole'],a:1,e:'Mitochondria release usable energy through cellular respiration.'}],
+'Chemistry':[{q:'What is the chemical symbol for sodium?',o:['S','So','Na','N'],a:2,e:'Sodium has the chemical symbol Na.'}],
+'Physics':[{q:'What is the SI unit of force?',o:['Joule','Watt','Newton','Pascal'],a:2,e:'Force is measured in newtons (N).'}],
+'Economics':[{q:'What is the basic economic problem caused by limited resources?',o:['Scarcity','Inflation','Taxation','Trade'],a:0,e:'Scarcity means resources are limited relative to wants.'}],
+'Government':[{q:'Which arm of government interprets laws?',o:['Executive','Legislature','Judiciary','Civil service'],a:2,e:'The judiciary interprets laws and adjudicates disputes.'}],
+'Computer Studies':[{q:'Which component is commonly called the brain of the computer?',o:['Monitor','CPU','Keyboard','Printer'],a:1,e:'The CPU processes instructions and controls operations.'}]
+};
+let qs=[],pos=0,answers=[],seconds=0,clock;
+const $=id=>document.getElementById(id);
+function start(){clearInterval(clock);const s=$('subject').value;qs=[...(bank[s]||bank.Mathematics)];const n=+$('count').value;while(qs.length<n)qs.push(...(bank[s]||bank.Mathematics));qs=qs.slice(0,n).sort(()=>Math.random()-.5);pos=0;answers=Array(qs.length).fill(null);seconds=0;$('setup').classList.add('hidden');$('results').classList.add('hidden');$('quiz').classList.remove('hidden');clock=setInterval(()=>{seconds++;$('timer').textContent='Time: '+String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')},1000);render()}
+function render(){const q=qs[pos];$('progress').textContent='Question '+(pos+1)+' of '+qs.length;$('question').textContent=q.q;$('status').textContent=$('exam').value+' · '+$('subject').value+' · SAMPLE PRACTICE';$('options').innerHTML='';q.o.forEach((v,i)=>{const b=document.createElement('button');b.className='option'+(answers[pos]===i?' chosen':'');b.textContent=String.fromCharCode(65+i)+'. '+v;b.onclick=()=>{answers[pos]=i;render()};$('options').appendChild(b)});$('next').textContent=pos===qs.length-1?'Finish and score':'Next question'}
+function finish(){clearInterval(clock);$('quiz').classList.add('hidden');$('results').classList.remove('hidden');let score=0;qs.forEach((q,i)=>{if(answers[i]===q.a)score++});$('score').textContent='Score: '+score+' / '+qs.length+' ('+Math.round(score/qs.length*100)+'%)';$('review').innerHTML='';qs.forEach((q,i)=>{const d=document.createElement('div');d.className='card';const h=document.createElement('h3');h.textContent=(i+1)+'. '+q.q;const p=document.createElement('p');p.textContent='Your answer: '+(answers[i]===null?'Not answered':q.o[answers[i]])+' | Correct answer: '+q.o[q.a];const e=document.createElement('p');e.textContent='Explanation: '+q.e;d.append(h,p,e);$('review').appendChild(d)});try{let h=JSON.parse(localStorage.getItem('okosodo-history')||'[]');h.unshift({date:new Date().toISOString(),exam:$('exam').value,subject:$('subject').value,score,total:qs.length});localStorage.setItem('okosodo-history',JSON.stringify(h.slice(0,30)))}catch(e){}}
+$('start').onclick=start;$('next').onclick=()=>{if(pos<qs.length-1){pos++;render()}else finish()};$('quit').onclick=finish;$('again').onclick=()=>{$('results').classList.add('hidden');$('setup').classList.remove('hidden')};
+if('serviceWorker'in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
