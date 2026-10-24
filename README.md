@@ -4,7 +4,7 @@ Offline-friendly Nigerian CBT practice app for WAEC, NECO, JAMB and general revi
 
 ## Available in the current version
 - 8 subjects: Mathematics, English Language, Biology, Chemistry, Physics, Economics, Government and Computer Studies.
-- 501 original exam-style practice questions, with at least 60 distinct questions per subject.
+- 809 original exam-style practice questions, with at least 100 distinct questions per subject.
 - 5, 10, 20 or 60 question sessions, randomised question order, answer selection and a session timer.
 - Previous/next navigation, keyboard selection (1–4), and a score with explanations for every question.
 - Saved results on the current device (last 30 attempts), history view, JSON history export and clear-history control.
