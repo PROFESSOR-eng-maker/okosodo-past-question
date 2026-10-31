@@ -30,6 +30,27 @@
 :root{font-family:system-ui,Arial,sans-serif;color:#172033;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#123c70;color:white;padding:22px 16px}header h1{margin:0;font-size:1.65rem}header p{margin:6px 0 0;color:#dceaff}.wrap{max-width:850px;margin:22px auto;padding:0 14px}.card{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 4px 18px #17375e12}label{display:block;font-weight:650;margin:12px 0 6px}select,button{font:inherit;padding:11px 12px;border-radius:9px;border:1px solid #cbd5e1;width:100%}button{background:#1556a6;color:#fff;border:0;font-weight:700;cursor:pointer;margin-top:12px}button.secondary{background:#e8eef8;color:#17365e}button:disabled{opacity:.5;cursor:not-allowed}.notice{background:#fff7df;border-left:4px solid #e6a700;padding:12px;border-radius:8px;font-size:.92rem}.muted{color:#596579;font-size:.92rem}.option{display:block;text-align:left;background:#f4f7fc;color:#172033;border:1px solid #d6dfed;margin:9px 0}.option.chosen{border:2px solid #1556a6;background:#eaf2ff}.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700}.hidden{display:none}.result{font-size:1.2rem;font-weight:800}.links a{display:inline-block;margin:8px 12px 0 0;color:#1556a6}footer{text-align:center;color:#667085;padding:20px;font-size:.85rem}
 body.dark{background:#101827;color:#e5edf8}body.dark .card{background:#1b293b;color:#e5edf8;box-shadow:none}body.dark .muted{color:#b8c5d8}body.dark .option{background:#26364d;color:#f4f7fc;border-color:#425570}body.dark .option.chosen{background:#193e69;border-color:#7db5ff}body.dark select,body.dark input{background:#26364d;color:#fff;border-color:#425570}body.dark .notice{background:#473a1d;color:#fff0c2;border-color:#e6a700}body.dark hr{border-color:#425570}.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}.stat{background:#edf3fb;border-radius:10px;padding:12px}.stat strong{display:block;font-size:1.35rem;color:#1556a6}body.dark .stat{background:#26364d}body.dark .stat strong{color:#9bc7ff}.smallbtn{width:auto;padding:8px 12px;margin:6px 8px 6px 0}
 @media print{body{background:#fff;color:#000}header,footer,#setup,#quiz,#history,#savedPage,#results>button{display:none!important}.wrap{max-width:none;margin:0;padding:0}#results{display:block!important;box-shadow:none;margin:0;padding:0}.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}#review .card{break-inside:avoid}button{display:none!important}}
+
+/* AI Study Assistant */
+.ai-panel{border:1px solid #cbd8ea;border-radius:14px;overflow:hidden;background:#f8fbff}
+.ai-heading{padding:16px;background:#123c70;color:#fff}
+.ai-heading h2{margin:0 0 5px}.ai-heading p{margin:0;color:#e1edff;font-size:.92rem}
+.ai-chat{height:320px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ai-message{max-width:88%;padding:11px 13px;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
+.ai-message.assistant{align-self:flex-start;background:#e7eef8;color:#172033;border-bottom-left-radius:4px}
+.ai-message.user{align-self:flex-end;background:#1556a6;color:#fff;border-bottom-right-radius:4px}
+.ai-compose{display:flex;gap:8px;padding:12px;border-top:1px solid #d9e2ef;background:#fff}
+.ai-compose textarea{flex:1;min-width:0;min-height:48px;max-height:120px;resize:vertical;padding:10px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}
+.ai-compose button{width:auto;min-width:88px;margin:0}
+.ai-status{padding:0 14px 12px;color:#596579;font-size:.85rem}
+.ai-suggestions{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 12px}
+.ai-suggestions button{width:auto;margin:0;padding:8px 10px;font-size:.85rem}
+body.dark .ai-panel{background:#1b293b;border-color:#425570}
+body.dark .ai-message.assistant{background:#26364d;color:#f4f7fc}
+body.dark .ai-compose{background:#1b293b;border-color:#425570}
+body.dark .ai-compose textarea{background:#26364d;color:#fff;border-color:#425570}
+body.dark .ai-status{color:#b8c5d8}
+
 </style>
 </head>
 <body>
@@ -66,12 +87,36 @@ body.dark{background:#101827;color:#e5edf8}body.dark .card{background:#1b293b;co
 <section class="card hidden" id="results"><h2>Practice results</h2><p class="result" id="score"></p><p id="resultMeta" class="muted"></p><div id="review"></div><button id="retryMissed" class="secondary">Practise missed questions</button><button id="printResults" class="secondary">Print / save result</button><button id="again">Try another test</button><button class="secondary" id="resultsHistory">View practice history</button></section>
 <section class="card hidden" id="history"><h2>Saved practice history</h2><p class="muted">Your last 30 attempts are saved on this device only. Clearing browser data may remove them.</p><div id="historyList"></div><button id="exportHistory">Export history (JSON)</button><button class="secondary" id="clearHistory">Clear history</button><button class="secondary" id="closeHistory">Back to practice setup</button></section>
 <section class="card hidden" id="savedPage"><h2>Saved questions</h2><p class="muted">Questions you save are stored on this device.</p><div id="savedList"></div><button class="secondary" id="savedBack">Back to practice setup</button></section>
+
+<section class="card" id="ai-study-assistant" aria-labelledby="ai-title">
+<div class="ai-panel">
+<div class="ai-heading"><h2 id="ai-title">🤖 AI Study Assistant</h2><p>Ask questions about school subjects and get step-by-step explanations.</p></div>
+<div class="ai-chat" id="aiChat" role="log" aria-live="polite" aria-label="Study assistant conversation">
+<div class="ai-message assistant">Hello! I’m your Okosodo AI Study Assistant. Ask me to explain a topic, solve an academic question step by step, or create practice questions.</div>
+</div>
+<div class="ai-suggestions">
+<button type="button" class="secondary ai-prompt" data-prompt="Explain projectile motion in simple steps and give one example.">Explain a topic</button>
+<button type="button" class="secondary ai-prompt" data-prompt="Create five SS2 Chemistry practice questions and provide answers with explanations.">Practice questions</button>
+<button type="button" class="secondary ai-prompt" data-prompt="Teach me how to solve simultaneous equations step by step.">Solve a problem</button>
+</div>
+<form class="ai-compose" id="aiForm">
+<textarea id="aiInput" maxlength="2500" rows="2" placeholder="Type your school question here..." aria-label="Your study question" required></textarea>
+<button type="submit" id="aiSend">Send</button>
+</form>
+<div class="ai-status" id="aiStatus" role="status">AI setup is not finished yet. The secure free AI service must be connected before replies can be generated.</div>
+</div>
+<p class="muted">Study responsibly: AI can make mistakes. Check important answers against your textbooks and teacher’s notes. Do not enter passwords, phone numbers, home addresses or other private information.</p>
+</section>
 <section class="card" aria-labelledby="faq-title">
 <h2 id="faq-title">Frequently asked questions</h2>
 <h3>Is Okosodo Past Question free?</h3><p>Yes. The CBT practice website is free to use.</p>
 <h3>Can I practise WAEC, NECO and JAMB subjects?</h3><p>Yes. Select WAEC, NECO or JAMB, then choose an available subject to begin a practice session.</p>
 <h3>Does the app work offline?</h3><p>The website is designed to cache its core files for offline-friendly use after it has loaded successfully online. Some features, such as opening external examination resources, still require internet access.</p>
 <h3>Are these official past papers?</h3><p>No. The built-in bank contains original exam-style practice questions and is not a verified collection of official historical examination papers.</p>
+
+<h3>About the creator</h3>
+<p>Okosodo Past Question was created to make exam preparation and independent revision more accessible to Nigerian students. Its goal is to bring CBT-style practice, clear explanations and useful study tools together in one easy-to-use website for WAEC, NECO and JAMB preparation.</p>
+<p class="muted">The creator’s focus is helping learners practise consistently, understand their mistakes and build confidence through learning.</p>
 </section>
 <section class="card"><h2>Official examination resources</h2><p class="muted">These links are provided for checking official information and resources. They need an internet connection.</p><div class="links"><a href="https://www.waeconline.org.ng/e-learning/" target="_blank" rel="noopener">WAEC e-Learning</a><a href="https://waec.estudy.ng/" target="_blank" rel="noopener">WAEC e-Study</a><a href="https://neco.gov.ng/" target="_blank" rel="noopener">NECO official site</a><a href="https://www.jamb.gov.ng/" target="_blank" rel="noopener">JAMB official site</a></div></section>
 </main><footer>Okosodo Past Question · Nigerian CBT practice and revision</footer>
@@ -178,4 +223,58 @@ $('clearHistory').onclick=()=>{if(confirm('Delete all saved practice history fro
 $('exportHistory').onclick=()=>{const data=JSON.stringify(readHistory(),null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='okosodo-practice-history.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)};
 document.addEventListener('keydown',e=>{if($('quiz').classList.contains('hidden'))return;if(['1','2','3','4'].includes(e.key)){const i=Number(e.key)-1;if(qs[pos]?.o[i]!==undefined){answers[pos]=i;render()}}else if(e.key==='ArrowLeft'&&pos>0){pos--;render()}else if(e.key==='ArrowRight'){if(pos<qs.length-1){pos++;render()}else finish(false)}});
 if('serviceWorker'in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+
+/* Okosodo AI Study Assistant. Set this after deploying cloudflare-worker/worker.js. */
+const OKOSODO_AI_ENDPOINT = 'https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev/api/chat';
+(function setupOkosodoAI(){
+ const form=document.getElementById('aiForm');
+ if(!form)return;
+ const input=document.getElementById('aiInput');
+ const send=document.getElementById('aiSend');
+ const chat=document.getElementById('aiChat');
+ const status=document.getElementById('aiStatus');
+ const history=[];
+ let busy=false;
+ function addMessage(role,content){
+  const bubble=document.createElement('div');
+  bubble.className='ai-message '+(role==='user'?'user':'assistant');
+  bubble.textContent=content;
+  chat.appendChild(bubble);
+  chat.scrollTop=chat.scrollHeight;
+ }
+ async function submitQuestion(question){
+  const prompt=String(question||'').trim();
+  if(!prompt||busy)return;
+  if(OKOSODO_AI_ENDPOINT.includes('YOUR-WORKER-NAME')){
+   status.textContent='The chat interface is ready, but the free AI service has not been deployed and connected yet.';
+   return;
+  }
+  busy=true;send.disabled=true;input.disabled=true;
+  addMessage('user',prompt);
+  history.push({role:'user',content:prompt});
+  status.textContent='Thinking…';
+  try{
+   const response=await fetch(OKOSODO_AI_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({messages:history.slice(-10)})
+   });
+   const data=await response.json().catch(()=>({}));
+   if(!response.ok)throw new Error(data.error||'The AI service could not answer right now.');
+   const answer=String(data.response||'').trim();
+   if(!answer)throw new Error('The AI returned an empty answer. Please try again.');
+   history.push({role:'assistant',content:answer});
+   addMessage('assistant',answer);
+   status.textContent='Ready · Free daily AI allowance applies.';
+  }catch(error){
+   history.pop();
+   addMessage('assistant',error.message||'Something went wrong. Please try again later.');
+   status.textContent='Connection issue. Your question was not saved by this website.';
+  }finally{
+   busy=false;send.disabled=false;input.disabled=false;input.focus();
+  }
+ }
+ form.addEventListener('submit',event=>{event.preventDefault();const q=input.value;input.value='';submitQuestion(q)});
+ document.querySelectorAll('.ai-prompt').forEach(button=>button.addEventListener('click',()=>submitQuestion(button.dataset.prompt)));
+})();
+
 </script></body></html>
