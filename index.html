@@ -128,7 +128,7 @@ function showHistory(){
 $('start').onclick=start;
 $('subject').addEventListener('change',updateSubjectCount);
 $('importPack').onclick=importPack;
-$('downloadTemplate').onclick=()=>saveDownload({Mathematics:[{q:'What is 2 + 2?',o:['2','3','4','5'],a:2,e:'2 + 2 = 4.'}]},'okosodo-question-pack-template.json');
+$('downloadTemplate').onclick=()=>saveDownload({"Mathematics":[{"q":"What is 2 + 2?","o":["2","3","4","5"],"a":2,"e":"2 + 2 = 4."}],"English Language":[],"Biology":[],"Chemistry":[],"Physics":[],"Economics":[],"Government":[],"Computer Studies":[],"Agricultural Science":[],"Commerce":[],"Financial Accounting":[],"Geography":[],"Literature-in-English":[],"Civic Education":[]},'okosodo-question-pack-template.json');
 updateSubjectCount();
 $('bookmarkQuestion').onclick=toggleSaved;
 $('savedOpen').onclick=showSaved;
