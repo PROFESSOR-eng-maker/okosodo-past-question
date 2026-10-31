@@ -29,6 +29,7 @@ body.dark{background:#101827;color:#e5edf8}body.dark .card{background:#1b293b;co
 <label for="exam">Examination</label><select id="exam"><option>WAEC</option><option>NECO</option><option>JAMB</option><option>General Practice</option></select>
 <label for="year">Year</label><select id="year"><option value="general">General practice (not a specific past paper)</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option></select>
 <label for="subject">Subject</label><select id="subject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Economics</option><option>Government</option><option>Computer Studies</option></select>
+<p class="muted" id="subjectBankCount" aria-live="polite"></p>
 <label for="count">Number of questions</label><select id="count"><option value="5">5 questions</option><option value="10">10 questions</option><option value="20">20 questions</option><option value="60">60 questions</option></select>
 <button id="start">Start practice</button>
 <button class="secondary" id="viewHistory">View practice history</button>
@@ -54,6 +55,7 @@ function isSaved(q){return readSaved().some(x=>x.q===q.q&&x.subject===$('subject
 function toggleSaved(){const q=qs[pos],items=readSaved(),subject=$('subject').value,index=items.findIndex(x=>x.q===q.q&&x.subject===subject);if(index>=0)items.splice(index,1);else items.unshift({...q,subject});try{localStorage.setItem(SAVED_KEY,JSON.stringify(items))}catch(e){}updateDashboard();$('bookmarkQuestion').textContent=isSaved(q)?'★ Saved question':'☆ Save question'}
 function showSaved(){clearInterval(clock);$('setup').classList.add('hidden');$('quiz').classList.add('hidden');$('results').classList.add('hidden');$('history').classList.add('hidden');$('savedPage').classList.remove('hidden');const list=$('savedList');list.innerHTML='';const items=readSaved();if(!items.length){list.textContent='No saved questions yet. Use “Save question” while practising.';return}items.forEach((q,i)=>{const d=document.createElement('div');d.className='card';const h=document.createElement('h3');h.textContent=(i+1)+'. '+q.subject+': '+q.q;const p=document.createElement('p');p.textContent='Answer: '+q.o[q.a];const e=document.createElement('p');e.textContent='Explanation: '+q.e;const b=document.createElement('button');b.className='secondary';b.textContent='Remove';b.onclick=()=>{const a=readSaved();a.splice(i,1);localStorage.setItem(SAVED_KEY,JSON.stringify(a));showSaved();updateDashboard()};d.append(h,p,e,b);list.appendChild(d)})}
 const $=id=>document.getElementById(id);
+function updateSubjectCount(){const s=$('subject').value,n=(bank[s]||[]).length;$('subjectBankCount').textContent=s+' currently has '+n+' original practice questions in this app.'}
 function readHistory(){try{const value=JSON.parse(localStorage.getItem('okosodo-history')||'[]');return Array.isArray(value)?value:[]}catch(e){return[]}}
 function start(){
  clearInterval(clock);
@@ -105,6 +107,8 @@ function showHistory(){
  h.forEach((item,i)=>{const d=document.createElement('div');d.className='card';const title=document.createElement('h3');title.textContent=(i+1)+'. '+(item.subject||'Practice')+' — '+(item.exam||'General Practice');const detail=document.createElement('p');detail.textContent='Score: '+item.score+'/'+item.total+' ('+(item.percent??Math.round(100*item.score/item.total))+'%) · Time: '+Math.floor((item.seconds||0)/60)+'m '+((item.seconds||0)%60)+'s';const date=document.createElement('p');date.className='muted';date.textContent=(item.year&&item.year!=='general'?'Year label: '+item.year+' · ':'')+(item.date?new Date(item.date).toLocaleString():'Date unavailable');d.append(title,detail,date);list.appendChild(d)});
 }
 $('start').onclick=start;
+$('subject').addEventListener('change',updateSubjectCount);
+updateSubjectCount();
 $('bookmarkQuestion').onclick=toggleSaved;
 $('savedOpen').onclick=showSaved;
 $('savedBack').onclick=()=>{$('savedPage').classList.add('hidden');$('setup').classList.remove('hidden')};
