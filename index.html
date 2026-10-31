@@ -33,6 +33,7 @@ body.dark{background:#101827;color:#e5edf8}body.dark .card{background:#1b293b;co
 <label for="subject">Subject</label><select id="subject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Economics</option><option>Government</option><option>Computer Studies</option><option>Agricultural Science</option><option>Commerce</option><option>Financial Accounting</option><option>Geography</option><option>Literature-in-English</option><option>Civic Education</option></select>
 <p class="muted" id="subjectBankCount" aria-live="polite"></p><div class="card"><h3>Import your own question pack</h3><p class="muted">Import teacher-made questions from a JSON file. These are stored only on this device.</p><input id="questionPackFile" type="file" accept=".json,application/json"><button class="secondary" id="importPack">Import question pack</button><button class="secondary" id="downloadTemplate">Download template</button><p id="importStatus" class="muted"></p></div>
 <label for="count">Number of questions</label><select id="count"><option value="5">5 questions</option><option value="10">10 questions</option><option value="20">20 questions</option><option value="60">60 questions</option><option value="100">100 questions</option></select>
+<label for="questionOrder">Question order</label><select id="questionOrder"><option value="random">Randomised questions</option><option value="sequential">Bank order</option></select>
 <label for="duration">Test duration</label><select id="duration"><option value="0">Untimed practice</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="120">120 minutes</option></select>
 <button id="start">Start practice</button>
 <button class="secondary" id="viewHistory">View practice history</button>
@@ -74,7 +75,7 @@ function start(){
  clearInterval(clock);
  const subject=$('subject').value,pool=getPool(subject),n=+$('count').value;
  if(n>pool.length){alert('This subject currently has '+pool.length+' distinct questions. No questions will be repeated to fill a test.');return}
- for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+ if($('questionOrder').value==='random'){for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}}
  qs=pool.slice(0,n);pos=0;answers=Array(qs.length).fill(null);seconds=0;durationLimit=Number($('duration').value)*60;
  $('setup').classList.add('hidden');$('results').classList.add('hidden');$('history').classList.add('hidden');$('quiz').classList.remove('hidden');
  $('timer').textContent=durationLimit?'Remaining: '+String(Math.floor(durationLimit/60)).padStart(2,'0')+':00':'Elapsed: 00:00';
