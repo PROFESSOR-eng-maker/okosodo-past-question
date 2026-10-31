@@ -6,5 +6,9 @@
   "display": "standalone",
   "background_color": "#f3f6fb",
   "theme_color": "#123c70",
-  "description": "Offline-friendly Nigerian CBT practice app."
+  "description": "Free offline-friendly Nigerian CBT practice with saved questions and progress tracking.",
+  "categories": [
+    "education",
+    "utilities"
+  ]
 }
