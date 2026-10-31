@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://professor-eng-maker.github.io/okosodo-past-question/sitemap.xml
