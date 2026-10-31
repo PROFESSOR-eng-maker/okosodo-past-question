@@ -6,8 +6,11 @@ A lightweight, offline-friendly Nigerian CBT practice website for WAEC, NECO, JA
 https://professor-eng-maker.github.io/okosodo-past-question/
 
 ## Current features
-- Multiple-choice practice across Mathematics, English Language, Biology, Chemistry, Physics, Economics, Government and Computer Studies.
-- Random question selection, previous/next navigation, answer tracking and timed sessions.
+- Multiple-choice practice across Mathematics, English Language, Biology, Chemistry, Physics, Economics, Government, Computer Studies, Agricultural Science, Commerce, Financial Accounting, Geography, Literature-in-English and Civic Education.
+- Random question selection, previous/next navigation, answer tracking, timed sessions and 100-question tests.
+- Retry missed questions, print score reports and export saved question packs.
+- Import teacher-created question packs using the provided JSON template.
+- Export and restore a local learner backup; installable web app on supported browsers.
 - Automatic scoring with explanations and answer review.
 - Local practice history (last 30 attempts), exportable as JSON.
 - Saved questions, learner name, progress summary and dark mode.
