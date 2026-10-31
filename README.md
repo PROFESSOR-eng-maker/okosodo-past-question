@@ -1,28 +1,27 @@
 # Okosodo Past Question
 
-Offline-friendly Nigerian CBT practice app for WAEC, NECO, JAMB and general revision.
+A lightweight, offline-friendly Nigerian CBT practice website for WAEC, NECO, JAMB and general revision.
 
-## Available in the current version
-- 8 subjects: Mathematics, English Language, Biology, Chemistry, Physics, Economics, Government and Computer Studies.
-- 809 original exam-style practice questions, with at least 100 distinct questions per subject.
-- 5, 10, 20 or 60 question sessions, randomised question order, answer selection and a session timer.
-- Previous/next navigation, keyboard selection (1–4), and a score with explanations for every question.
-- Saved results on the current device (last 30 attempts), history view, JSON history export and clear-history control.
-- Responsive web interface and offline app-shell caching after the app has been opened once while online.
-- Links to official examination resources.
+## Live website
+https://professor-eng-maker.github.io/okosodo-past-question/
 
-## Important question-authenticity notice
-The bundled questions are original practice questions, not a verified archive of historical WAEC, NECO or JAMB papers. The examination and year selectors are practice-session labels; they do not yet load separate verified papers for each examination/year. Do not treat a selected year as proof that a question appeared in that year's examination.
+## Current features
+- Multiple-choice practice across Mathematics, English Language, Biology, Chemistry, Physics, Economics, Government and Computer Studies.
+- Random question selection, previous/next navigation, answer tracking and timed sessions.
+- Automatic scoring with explanations and answer review.
+- Local practice history (last 30 attempts), exportable as JSON.
+- Saved questions, learner name, progress summary and dark mode.
+- Responsive layout and service-worker offline cache.
+- Android debug APK build through GitHub Actions.
 
-The requested full historical collection (60 questions for every year, subject and examination from 2000–2025) is **not complete**. It requires a verified, legally usable source for each paper and careful tagging. The app should not invent past-paper provenance or present generated practice questions as official questions.
+## Important question-bank note
+The built-in bank contains original exam-style revision questions. Exam and year selectors label a practice session; they do not mean questions are verified reproductions of a specific historical WAEC, NECO or JAMB paper. Use the official examination-board links shown inside the app for authentic resources.
 
-## Official examination resources
-- WAEC e-Learning: https://www.waeconline.org.ng/e-learning/
-- WAEC e-Study: https://waec.estudy.ng/
-- NECO: https://neco.gov.ng/
-- JAMB: https://www.jamb.gov.ng/
+## Updating
+Changes pushed to the `main` branch update the GitHub Pages site. Web-app changes trigger the Android APK workflow. Users may need to refresh the site. Installed/offline copies should reconnect to the internet and reopen to receive the updated cache.
 
-## Website and Android build
-- Live app: https://professor-eng-maker.github.io/okosodo-past-question/
-- GitHub Actions builds: https://github.com/PROFESSOR-eng-maker/okosodo-past-question/actions
-- Android APK artifacts are published by the Android build workflow. Open a successful workflow run, then download the ZIP under **Artifacts**.
+## Local data and privacy
+Learner name, saved questions and practice history are stored in the browser on the user's device. There is currently no online account system or cloud synchronisation.
+
+## Development
+The website is a static HTML/CSS/JavaScript app. Android packaging uses Capacitor and GitHub Actions.
