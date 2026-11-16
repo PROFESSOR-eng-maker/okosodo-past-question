@@ -61,11 +61,11 @@ body.dark .ai-status{color:#b8c5d8}
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:16px}
 .team-card{padding:17px 12px 16px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.035));border:1px solid rgba(236,205,131,.28);box-shadow:inset 0 1px rgba(255,255,255,.12);transition:transform .2s ease,border-color .2s ease}
 .team-card:hover{transform:translateY(-5px);border-color:#e8c56f}
-.team-avatar{width:112px;height:112px;margin:0 auto 13px;border-radius:50%;display:grid;place-items:center;border:3px solid #e7c36f;box-shadow:0 0 0 6px rgba(231,195,111,.12),0 10px 25px rgba(0,0,0,.3);position:relative;overflow:hidden}
-.team-avatar:before{content:"";position:absolute;inset:12% 19% 42%;border-radius:50%;background:linear-gradient(145deg,#f1c9a2,#a96b4b);box-shadow:0 48px 0 18px #14233e}
-.team-avatar:after{content:"";position:absolute;top:13%;width:53%;height:19%;border-radius:60% 60% 25% 25%;background:#171a22}
-.team-avatar span{position:absolute;z-index:2;bottom:7px;right:8px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#e7c36f;color:#10203c;font-weight:900;font-size:.9rem}
-.avatar-one{background:linear-gradient(135deg,#1457a5,#07172e)}.avatar-two{background:linear-gradient(135deg,#8d5128,#151d37)}.avatar-three{background:linear-gradient(135deg,#146d70,#0c1b35)}.avatar-four{background:linear-gradient(135deg,#65469a,#101a36)}
+.team-avatar{width:112px;height:112px;margin:0 auto 13px;border-radius:50%;border:3px solid #e7c36f;box-shadow:0 0 0 6px rgba(231,195,111,.12),0 10px 25px rgba(0,0,0,.3);overflow:hidden;background-image:url("images/team-portraits.jpg");background-size:200% 200%;background-repeat:no-repeat}
+.team-avatar:before{content:none}
+.team-avatar:after{content:none}
+.team-avatar span{display:none}
+.avatar-one{background-position:left top}.avatar-two{background-position:right top}.avatar-three{background-position:left bottom}.avatar-four{background-position:right bottom}
 .team-card h3{margin:8px 0 4px;color:#ffe6a6;letter-spacing:.12em;font-size:1rem}
 .team-card p{margin:0;color:#d4ddec;font-size:.84rem}
 .team-note{margin:18px 0 0;color:#aebbd0;font-size:.75rem}
@@ -174,7 +174,7 @@ body.dark .ai-status{color:#b8c5d8}
 <article class="team-card"><div class="team-avatar avatar-three" role="img" aria-label="Stylised male creator portrait"><span>J</span></div><h3>JOSHUA</h3><p>Creator Team</p></article>
 <article class="team-card"><div class="team-avatar avatar-four" role="img" aria-label="Stylised male creator portrait"><span>S</span></div><h3>SOREFUNMI</h3><p>Creator Team</p></article>
 </div>
-<p class="team-note">Portrait illustrations are representative designs, not photographs or verified likenesses of the creators.</p>
+<p class="team-note">AI-generated concept portraits; they are not verified photographs or exact likenesses of the creators.</p>
 </section>
 <p>Okosodo Past Question was created to make exam preparation and independent revision more accessible to Nigerian students. Its goal is to bring CBT-style practice, clear explanations and useful study tools together in one easy-to-use website for WAEC, NECO and JAMB preparation.</p>
 </section>
